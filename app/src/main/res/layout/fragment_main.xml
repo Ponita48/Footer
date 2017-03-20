@@ -15,10 +15,18 @@
 
         <com.ogaclejapan.smarttablayout.SmartTabLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="45dp"
             android:id="@+id/viewPagerTab"
+            android:background="@color/colorPrimary"
+            android:elevation="1dp"
             app:stl_distributeEvenly="true"
-            app:stl_indicatorInterpolation="linear"/>
+            app:stl_indicatorInterpolation="linear"
+            app:stl_indicatorColor="#E3F2FD"
+            app:stl_defaultTabTextSize="12sp"
+            app:stl_defaultTabTextColor="#FFFFFF"
+            app:stl_defaultTabTextHorizontalPadding="10dp"
+            app:stl_dividerThickness="0dp"
+            app:stl_indicatorThickness="4dp"/>
 
         <android.support.v4.view.ViewPager
             android:layout_width="match_parent"

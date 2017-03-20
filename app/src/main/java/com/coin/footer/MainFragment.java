@@ -49,7 +49,7 @@ public class MainFragment extends Fragment {
         FragmentPagerItemAdapter adapter = new FragmentPagerItemAdapter(
                 getChildFragmentManager(), FragmentPagerItems.with(getContext())
                 .add("POPULARITY", PopularityFragment.class)
-                .add("POPULARITY", PopularityFragment.class)
+                .add("FAVORITES", FavoritesFragment.class)
                 .create());
 
         ViewPager viewPager = (ViewPager) view.findViewById(R.id.viewPagerContent);

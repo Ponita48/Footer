@@ -39,7 +39,7 @@ public class PopularityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_popularity, container, false);
-        loading = (ProgressBar) view.findViewById(R.id.loading);
+        loading = (ProgressBar) view.findViewById(R.id.loadPopularity);
         list = (ListView) view.findViewById(R.id.listPopular);
         
         return view;
