@@ -9,11 +9,24 @@
         <item
             android:id="@+id/nav_about"
             android:icon="@drawable/ic_info_black_24dp"
-            android:title="About" />
+            android:title="About"
+            android:visible="false"/>
         <item
             android:id="@+id/nav_feedback"
             android:icon="@drawable/ic_feedback_black_24dp"
             android:title="Feedback" />
+    </group>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_login"
+            android:title="Login"
+            android:visible="true"
+            android:icon="@drawable/ic_person_black_24dp"/>
+        <item
+            android:id="@+id/nav_logout"
+            android:title="Logout"
+            android:visible="false"
+            android:icon="@drawable/ic_person_outline_black_24dp"/>
     </group>
 
 </menu>

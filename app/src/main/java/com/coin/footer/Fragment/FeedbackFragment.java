@@ -1,4 +1,4 @@
-package com.coin.footer;
+package com.coin.footer.fragment;
 
 import android.content.Context;
 import android.net.Uri;
@@ -7,21 +7,23 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
-import android.widget.ProgressBar;
+import android.widget.Button;
+import android.widget.EditText;
 
+import com.coin.footer.R;
 
-public class FavoritesFragment extends Fragment {
+public class FeedbackFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
 
-    ProgressBar loading;
-    ListView listView;
+    private EditText editText;
+    private Button send;
 
-    public FavoritesFragment() {
+    public FeedbackFragment() {
         // Required empty public constructor
     }
-    public static FavoritesFragment newInstance(String param1, String param2) {
-        FavoritesFragment fragment = new FavoritesFragment();
+
+    public static FeedbackFragment newInstance(String param1, String param2) {
+        FeedbackFragment fragment = new FeedbackFragment();
         return fragment;
     }
 
@@ -33,15 +35,22 @@ public class FavoritesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_favorites, container, false);
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_feedback, container, false);
 
-        loading = (ProgressBar) view.findViewById(R.id.loadFavorite);
-        listView = (ListView) view.findViewById(R.id.listFavorite);
+        editText = (EditText) view.findViewById(R.id.editFeedback);
+        send = (Button) view.findViewById(R.id.sendFeedback);
 
+        send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO: KIRIM EMAIL
+            }
+        });
+        getActivity().setTitle("Feedback");
         return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -66,6 +75,7 @@ public class FavoritesFragment extends Fragment {
     }
 
     public interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 }

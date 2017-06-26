@@ -2,17 +2,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.coin.footer.PopularityFragment">
+    tools:context=".fragment.PopularityFragment">
 
     <ProgressBar
+        android:id="@+id/loadPopularity"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/loadPopularity"/>
+        android:progressDrawable="@color/loading" />
 
     <ListView
+        android:id="@+id/listPopular"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/listPopular"
-        android:visibility="visible"/>
+        android:visibility="visible" />
 
 </FrameLayout>

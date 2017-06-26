@@ -1,9 +1,12 @@
-package com.coin.footer;
+package com.coin.footer.fragment;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,22 +14,36 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
+
+import com.coin.footer.R;
+import com.coin.footer.activity.RestoActivity;
+import com.coin.footer.adapter.RestoListAdapter;
+import com.coin.footer.dao.Restaurant;
+import com.coin.footer.dao.RestaurantDisplay;
+import com.coin.footer.services.APIService;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
-public class PopularityFragment extends Fragment {
-    
+public class FavoritesFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
-    private ProgressBar loading;
-    private ListView list;
 
-    public PopularityFragment() {
+    ProgressBar loading;
+    ListView list;
+
+    public FavoritesFragment() {
         // Required empty public constructor
     }
-
-    public static PopularityFragment newInstance(String param1, String param2) {
-        PopularityFragment fragment = new PopularityFragment();
+    public static FavoritesFragment newInstance(String param1, String param2) {
+        FavoritesFragment fragment = new FavoritesFragment();
         return fragment;
     }
 
@@ -38,10 +55,13 @@ public class PopularityFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_popularity, container, false);
-        loading = (ProgressBar) view.findViewById(R.id.loadPopularity);
-        list = (ListView) view.findViewById(R.id.listPopular);
-        
+        View view = inflater.inflate(R.layout.fragment_favorites, container, false);
+
+        loading = (ProgressBar) view.findViewById(R.id.loadFavorite);
+        list = (ListView) view.findViewById(R.id.listFavorite);
+        loading.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.loading),
+                PorterDuff.Mode.MULTIPLY);
+        getResto();
         return view;
     }
 
@@ -70,10 +90,8 @@ public class PopularityFragment extends Fragment {
     }
 
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
-
     /**
      * Fungsi buat tampilin loading
      */
@@ -109,4 +127,45 @@ public class PopularityFragment extends Fragment {
             list.setVisibility(show ? View.GONE : View.VISIBLE);
         }
     }
+
+    private void getResto() {
+        showProgress(true);
+        SharedPreferences preferences = this.getActivity().getSharedPreferences("USER",
+                Context.MODE_PRIVATE);
+        String token = preferences.getString("TOKEN", "0");
+        Call<RestaurantDisplay> call = APIService.services.getAllFav(token);
+        call.enqueue(new Callback<RestaurantDisplay>() {
+            @Override
+            public void onResponse(Call<RestaurantDisplay> call, Response<RestaurantDisplay> response) {
+                if (response.isSuccessful()) {
+                    final List<Restaurant> resto = response.body().getRestaurant();
+                    try {
+                        RestoListAdapter adapter = new RestoListAdapter(getContext(), resto);
+                        list.setAdapter(adapter);
+                    } catch (Exception e) {
+
+                    }
+                    list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            Intent in = new Intent(getContext(), RestoActivity.class);
+                            in.putExtra("ID_RESTO", resto.get(position).getIDRestaurant());
+                            startActivity(in);
+                        }
+                    });
+                } else {
+                    Toast.makeText(getContext(), "Connection Timed Out", Toast.LENGTH_SHORT).show();
+                }
+                showProgress(false);
+            }
+
+            @Override
+            public void onFailure(Call<RestaurantDisplay> call, Throwable t) {
+                Toast.makeText(getContext(), "Please check your connection",
+                        Toast.LENGTH_SHORT).show();
+                showProgress(false);
+            }
+        });
+    }
+
 }

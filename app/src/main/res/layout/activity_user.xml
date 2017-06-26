@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.coin.footer.activity.UserActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/batik"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/fotoUser"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="16dp"
+            android:src="@color/loading" />
+
+        <TextView
+            android:id="@+id/namaUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:paddingBottom="16dp"
+            android:textAlignment="center"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:columnCount="2">
+
+        <TextView
+            android:layout_gravity="end"
+            android:paddingBottom="16dp"
+            android:text=" Username"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/unameUser"
+            android:paddingBottom="16dp"
+            android:text=" user"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_gravity="end"
+            android:paddingBottom="16dp"
+            android:text=" Nickname"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/nickUser"
+            android:paddingBottom="16dp"
+            android:text=" nickname"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_gravity="end"
+            android:paddingBottom="16dp"
+            android:text=" Gender"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/genderUser"
+            android:paddingBottom="16dp"
+            android:text=" gender"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_gravity="end"
+            android:paddingBottom="16dp"
+            android:text=" E-mail"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/emailUser"
+            android:paddingBottom="16dp"
+            android:text=" email"
+            android:textSize="20sp" />
+
+    </GridLayout>
+
+</LinearLayout>
